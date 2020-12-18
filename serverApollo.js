@@ -6,12 +6,12 @@ const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers/index.js')
 const PORT = process.env.port || 5500;
 
-const pubSub = new PubSub();
+const pubsub = new PubSub();
 
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => ({ req, pubSub })
+    context: ({ req }) => ({ req, pubsub })
 });
 
 mongoose
