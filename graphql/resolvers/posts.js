@@ -1,6 +1,7 @@
 const Post = require('../../models/Post');
 const checkAuth = require('../../util/check-auth');
 const { AuthenticationError, UserInputError  } = require('apollo-server');
+const User = require('../../models/User');
 
 module.exports = {
     Query: {
@@ -8,6 +9,20 @@ module.exports = {
         try {
             const posts = await Post.find().sort({createdAt: -1});
             return posts;
+        } catch (error) {
+            throw new Error(err);
+        }
+
+      },
+      async getPostsOfUser(_, { userId }) {
+
+        try {
+          const user1 = await User.find({ username: userId });
+
+          const posts = await Post.find({ username: user1[0].username }).sort({createdAt: -1});
+
+          return posts;
+
         } catch (error) {
             throw new Error(err);
         }

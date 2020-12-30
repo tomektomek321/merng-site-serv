@@ -70,7 +70,8 @@ module.exports = {
 
                 if (post.comments[comIdx].likes.find((like) => like.username === username)) {
 
-                  post.comments[comIdx].likes = com.likes.filter((like) => like.username !== username);
+                  post.comments[comIdx].likes
+                    = post.comments[comIdx].likes.filter((like) => like.username !== username);
 
                 } else {
 
