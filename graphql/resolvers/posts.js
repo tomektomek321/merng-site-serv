@@ -28,6 +28,26 @@ module.exports = {
         }
 
       },
+      async getLikedPostsOfUser(_, { userId }) {
+
+        try {
+          const post1 = await Post.find();
+
+          const w = post1.filter(v => {
+            if(v.likes.find(function(it) { return it.username === userId }) !== undefined) {
+              return true;
+            } else {
+              return false;
+            }
+          })
+
+          return w;
+
+        } catch (error) {
+          throw new Error(err);
+        }
+
+      },
       async getPost(_, { postId }) {
         try {
           const post = await Post.findById(postId);
